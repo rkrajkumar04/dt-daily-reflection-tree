@@ -1,47 +1,49 @@
 # DT Fellowship Assignment: Design Rationale
 
-## Why These Questions
+## Why I Chose These Questions
 
-I designed the tree as one continuous evening conversation rather than three separate quizzes. The opening question asks for a simple emotional label because that is cognitively easy at the end of a workday and creates a natural branch into Axis 1. From there, the questions gradually move from surface description to deeper interpretation:
+While designing this tree, I kept thinking about the actual moment when a tired employee would use it. At the end of the day, most people do not want to fill out something that feels like a personality test or a formal survey. So I wanted the flow to feel more like a short, structured conversation.
 
-- Axis 1 asks how the employee interpreted what happened and where they still had some choice.
-- Axis 2 shifts from interpretation to contribution by asking what they gave in one concrete interaction.
-- Axis 3 widens the frame from personal experience to team, colleague, or customer impact.
+I started with a very simple opening question, asking the user to describe the day in one word. I chose that because it is easy to answer and it immediately gives emotional context to the rest of the reflection. From there, I designed the tree so that each axis goes one step deeper.
 
-Each question uses fixed options that are psychologically meaningful but still realistic. I avoided obviously “good” and “bad” answers because the assignment emphasizes reflection without moralizing. For example, “I felt overlooked” and “I was frustrated that others were not doing their part” are plausible end-of-day thoughts, not strawman options.
+In Axis 1, I wanted the questions to surface agency without sounding like blame. The point is not to ask, "Was everything your fault?" but rather, "Where did you still have a choice?" That is why the follow-up questions focus on preparation, response, adaptation, or waiting.
 
-## Branching Logic And Trade-Offs
+In Axis 2, I wanted to shift the reflection from "What did I get today?" toward "What did I give today?" I tried to make the options realistic and honest. Real employees do feel overlooked, and they do get frustrated when others are not pulling their weight. I included those options because if every answer sounds overly noble, the tree becomes fake.
 
-The tree uses three kinds of branching:
+In Axis 3, I wanted the user to widen their frame of attention. I used options like self, team, colleague, and customer because they naturally represent a widening radius of concern. My goal here was not to dismiss personal stress, but to show that meaning often becomes clearer when the user steps slightly outside their own immediate frustration.
 
-- Early answer-based routing to keep the conversation context-sensitive.
-- Signal accumulation across each axis to detect the dominant leaning.
-- Reflection selection based on the dominant pole on that axis.
+## How I Designed The Branching
 
-This hybrid design let me keep the tree deterministic while still making it feel conversational. If I had used only direct answer-to-answer routing, the experience would become brittle and too literal. If I had used only score tallies, the experience would feel like a hidden quiz. Combining both created a better balance: the user gets relevant follow-up questions, but the reflections still synthesize across multiple answers.
+I used a combination of direct branching and signal-based branching.
 
-One trade-off is that I kept the tree moderately sized rather than exhaustively branching every option into a unique path. That was intentional. The assignment values structure and thoughtfulness, and a medium-sized tree is easier to audit, extend, and implement correctly in a short timeline than a very large one with redundant sub-branches.
+Direct branching helps the tree feel responsive. For example, if the user starts the session by describing the day as tough or draining, the next question should not sound the same as it would for someone who said productive or mixed. That first branch makes the conversation feel more natural.
 
-## Psychological Sources
+At the same time, I did not want every single option to create a completely separate sub-tree, because that would make the structure too large and harder to maintain. So I used signals to accumulate leanings across each axis. For example, on Axis 1, answers can add to either internal or external locus. Then a later decision node checks which side is dominant and chooses the reflection accordingly.
 
-The tree was informed by the three source frames in the prompt:
+This approach helped me make the system deterministic without making it feel mechanical. It is still fully traceable as a tree, but the reflections are based on a pattern across multiple answers rather than one isolated response.
 
-- Julian Rotter on locus of control, especially the difference between agency and externalization.
-- Carol Dweck on growth mindset, particularly the belief that response and strategy matter even when outcomes are imperfect.
-- Campbell et al. on psychological entitlement and Organ on organizational citizenship behavior, which informed the contribution versus expectation framing.
-- Maslow’s later work on self-transcendence and Batson’s work on perspective-taking, which informed the widening-radius questions.
+The main trade-off I made was keeping the tree medium-sized instead of trying to make every path highly granular. If I had more time, I could build more nuanced mid-spectrum branches. But for this assignment, I felt it was better to build a tree that was clear, coherent, and auditable rather than one that was very large but repetitive.
 
-The practical design interpretation was:
+## Psychological Sources That Informed My Design
 
-- Axis 1 should surface agency without implying total control.
-- Axis 2 should surface contribution without shaming unmet needs for fairness or recognition.
-- Axis 3 should expand perspective without denying the employee’s own stress.
+I used the three psychological axes given in the prompt as the main foundation.
+
+For Axis 1, I used the idea of locus of control from Julian Rotter, along with the growth mindset framing from Carol Dweck. What mattered to me here was the distinction between total control and meaningful agency. A person may not control the whole situation, but they may still control preparation, escalation, interpretation, or response.
+
+For Axis 2, I used the contrast between psychological entitlement and contribution-oriented behavior. The idea of organizational citizenship behavior was especially useful because it gave me a concrete way to think about everyday contribution: helping someone, teaching, unblocking work, or doing something useful beyond strict role boundaries.
+
+For Axis 3, I used the ideas of self-transcendence and perspective-taking. I found this axis especially interesting because it is not really about suppressing the self. It is about widening the frame so that the person can see team, colleague, or customer impact alongside their own experience.
+
+Overall, I tried to translate these theories into practical fixed-choice questions that a real employee might actually answer honestly at 7 p.m.
 
 ## What I Would Improve With More Time
 
-With more time, I would improve the project in four ways:
+If I had more time, I would improve the project in four main ways.
 
-- Add more mid-spectrum branches for genuinely mixed cases, especially users who alternate between agency and frustration in the same day.
-- Create multiple summary templates keyed to dominant-pattern combinations so the ending feels even more tailored while staying deterministic.
-- Build a lightweight web UI with progress indication and session history.
-- Run usability tests with real users and revise any options that feel too close together or too easy to game.
+First, I would add more mixed-path reflections. Right now, the tree captures the major leanings well, but some people will genuinely show both agency and frustration, or both contribution and entitlement, in the same day. I would like to support those middle states more explicitly.
+
+Second, I would expand the summary layer. At the moment, the summary is deterministic and useful, but it could become more tailored by combining multiple axis patterns into different summary templates.
+
+Third, I would build a lightweight web interface. The CLI works well for demonstrating the logic, but a simple UI with progress indication and cleaner transitions would make the reflection experience more natural.
+
+Finally, I would test the tree with real users. The strongest next improvement would come from observing where people hesitate, where two answer options feel too similar, or where a reflection does not land as intended.
